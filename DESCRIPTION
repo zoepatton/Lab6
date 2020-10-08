@@ -6,7 +6,7 @@ Date: 2020-10-05
 Author: Who wrote it
 Maintainer: Who to complain to <yourfault@somewhere.net>
 Description: This packages uses three functions to find the largest value of elements added to the knapsack.
-License: What license is it under?
+License: GPL-3
 Encoding: UTF-8
 RoxygenNote: 7.1.1
 Suggests: 
