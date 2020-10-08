@@ -1,6 +1,6 @@
-#' Largest possible value in weighted bag
+#' Largest possible value in weighted bag - brute force
 #'
-#' This function takes the values and weights provided in a data frame and finds the largest possible sum of values that is less than or equal to the inputed weight. 
+#' This function takes the values and weights provided in a data frame and finds the largest possible sum of values that is less than or equal to the inputed weight by trying all possible combinations. 
 #'
 #' @param x data frame
 #' @param W positive numeric value
@@ -39,13 +39,17 @@ brute_force_knapsack<-function(x,W){
       }
       
       maxweight<-which(unlist(weights)<=W)
-      correspondingValues<-unlist(values)[maxweight]
+      correspondingValues<-round(unlist(values))[maxweight]
       valuesmax<-max(correspondingValues)
       
-      index<-which(unlist(values) == valuesmax)
-      coorespondingElement<-unlist(elementCombos)[index]
-      return(list(value=valuesmax,elements=unlist(coorespondingElement)))
+      index<-which(round(unlist(values)) == valuesmax)
+      correspondingElement<-unlist(elementCombos)[index]
+      elements<-unlist(strsplit((correspondingElement),""))
+      return(list(value=valuesmax,elements=as.numeric(elements)))
     }
     else
       stop("values are not positive")
 }
+
+#system time for n=16
+#system.time(brute_force_knapsack(x = knapsack_objects[1:16,], W = 3500))
