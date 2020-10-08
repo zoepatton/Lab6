@@ -54,6 +54,7 @@ greedy_knapsack <- function(x, W){
   return(greedy_list)
 }
 
-
-#system.time(greedy_knapsack(x = knapsack_objects[1:1000000,], W = 3500))
+library(profvis)
+source("R/greedy.R")
+profvis(greedy_knapsack(x = knapsack_objects[1:1000000,], W = 3500))
 

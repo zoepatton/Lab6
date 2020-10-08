@@ -16,6 +16,7 @@ knapsack_objects <-
 
 #largest value (sum of v's in the data frame) that is below the overall weight 
 
+
 brute_force_knapsack<-function(x,W){
   if (!is.data.frame(x)){
     stop("x is not a data frame")
@@ -51,5 +52,8 @@ brute_force_knapsack<-function(x,W){
       stop("values are not positive")
 }
 
+
 #system time for n=16
-#system.time(brute_force_knapsack(x = knapsack_objects[1:16,], W = 3500))
+library(profvis)
+source("R/brute_force.R")
+profvis(brute_force_knapsack(x = knapsack_objects[1:16,], W = 3500))

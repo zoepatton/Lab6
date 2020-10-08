@@ -80,3 +80,7 @@ knapsack_dynamic <- function(x,W){
   
   return(final_list)
 }
+
+library(profvis)
+source("R/dynamic.R")
+profvis(knapsack_dynamic(x = knapsack_objects[1:500,], W = 3500))
