@@ -53,7 +53,3 @@ brute_force_knapsack<-function(x,W){
 }
 
 
-#system time for n=16
-library(profvis)
-source("R/brute_force.R")
-profvis(brute_force_knapsack(x = knapsack_objects[1:16,], W = 3500))

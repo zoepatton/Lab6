@@ -1,0 +1,81 @@
+---
+title: "Lab 6 Report"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{my-vignette}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(knapsack)
+library(profvis)
+library(parallel)
+```
+
+## 1.1.2 Brute force search 
+
+It takes 0.533 seconds to run the algorithm for n = 16 objects:
+```{r, eval=FALSE}
+system.time(brute_force_knapsack(x = knapsack_objects[1:16,], W = 3500))
+```
+
+
+## 1.1.3 Dynamic programming   
+
+It takes 0.717 seconds to run the algorithm for n = 500 objects:
+```{r, eval=FALSE}
+system.time(knapsack_dynamic(x = knapsack_objects[1:500,], W = 3500))
+```
+
+
+## 1.1.4 Greedy heuristic 
+
+It takes 0.5 seconds to run the algorithm for n = 1000000 objects:
+```{r, eval=FALSE}
+system.time(greedy_knapsack(x = knapsack_objects[1:1000000,], W = 3500))
+```
+
+
+## 1.1.6 Profile your code and optimize your code  
+
+### Brute force  
+The code below showed that using the combn function to generate a list of the possible element combinations took 410ms and took up the highest percentage of tracked execution time. For loops are very time consuming which is likely the reason for the high execution time, we reduced time by parallizing the code.   
+```{r, eval=FALSE}
+library(profvis)
+source("R/brute_force.R")
+profvis(brute_force_knapsack(x = knapsack_objects[1:16,], W = 3500))
+```
+
+
+### Dynamic  
+The code below showed that the largest percentage of executed time went to producing the resulting matrix and indexing the elements using the which function. These took 280ms and 180ms respectfully.   
+```{r, eval=FALSE}
+library(profvis)
+source("R/dynamic.R")
+profvis(knapsack_dynamic(x = knapsack_objects[1:500,], W = 3500))
+```
+
+
+
+### Greedy
+The code below showed that using the most time consuming bottleneck is in the "if" statement checking whether or not x is a data frame, taking 350ms. The second bottleneck is when ordering the values per weight elements in descending order, taking 160ms.  Since this function stops when the bag is filled, we changed our code to have the ordering done before the iteration to reduce the overall time as a performance gain. 
+```{r, eval=FALSE}
+library(profvis)
+source("R/greedy.R")
+profvis(greedy_knapsack(x = knapsack_objects[1:1000000,], W = 2000))
+```
+
+
+## 1.1.8  Parallelize brute force search  
+When we parallelized the brute force function we reduced the system time from 0.533 seconds to 
+```{r, eval=FALSE}
+system.time(brute_force_knapsack(x = knapsack_objects[1:16,], W = 3500))
+```

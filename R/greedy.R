@@ -24,7 +24,7 @@ greedy_knapsack <- function(x, W){
   }
   
   
-  if(all(x$v > 0) & all(x$w > 0)){
+  if(any(x$v > 0) & any(x$w > 0)){
     
     x <- x[order(x$v/x$w, decreasing = TRUE), ]
     max_weight <- W
@@ -54,7 +54,5 @@ greedy_knapsack <- function(x, W){
   return(greedy_list)
 }
 
-library(profvis)
-source("R/greedy.R")
-profvis(greedy_knapsack(x = knapsack_objects[1:1000000,], W = 3500))
+
 
