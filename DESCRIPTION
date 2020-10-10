@@ -14,5 +14,8 @@ Suggests:
     knitr,
     rmarkdown,
     profvis,
-    parallel
+    parallel,
+    foreach,
+    iterators,
+    doParallel
 VignetteBuilder: knitr
