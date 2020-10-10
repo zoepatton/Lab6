@@ -8,11 +8,6 @@
 #' @export
 
 
-library(foreach)
-library(doParallel)
-library(parallel)
-library(iterators)
-
 
 set.seed(42)
 n <- 2000
