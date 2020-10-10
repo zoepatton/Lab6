@@ -7,7 +7,7 @@
 #' @return The output will be a numerical value(the largest possible sum) and the corresponding numerical elements that make that sum
 #' @export
 
-library(profvis)
+
 library(foreach)
 library(doParallel)
 library(parallel)
