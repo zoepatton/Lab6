@@ -28,19 +28,19 @@ knapsack_dynamic <- function(x,W){
   
   if(all(x$v > 0) & all(x$w > 0)){
     
-    v <- c(0,x[,2])
-    w <- c(0,x[,1])  
-    max_weight <- W+1
-    n<-nrow(x)+1
+    v <- x[,2]
+    w <- x[,1]  
+    max_weight <- W
+    n<-nrow(x)
     
-    H <- matrix(0, nrow = n, ncol = max_weight)
+    H <- matrix(0, nrow = n+1, ncol = max_weight+1)
     
     for(k in 0:max_weight){
       H[0, k] <- 0
     }
     
-    for(j in 0:max_weight){
-      for(i in 2:n){       
+    for(i in 2:n){
+      for(j in 0:max_weight){       
         
         if(j < w[i]){
           
@@ -54,22 +54,22 @@ knapsack_dynamic <- function(x,W){
       }
     }
     
+    #find elements  
     
-    #find elements
-    
-    elements<-c()
-    max_result <- max(result)
+    max_result <- max(result)  
+    elements <- c()
     
     repeat{
       
-      back <- which(H == max_result, arr.ind = TRUE)[1,1]
+      back <- matrix(which(H == max_result, arr.ind = T),1,1)
       max_result <- max_result - v[back]
-      elements <- c(as.numeric(back-1), elements)
+      
+      elements <- c(back, elements)
+      
       
       if(0 == max_result){break}
       
     }
-    
     value <- round(max(result))
     final_list <- list(value, elements)
     names(final_list) <- c("value", "elements")
