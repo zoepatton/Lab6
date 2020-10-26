@@ -5,7 +5,7 @@
 #' @param x data frame
 #' @param W positive numeric value
 #' @return The output will be a numerical value(the largest possible sum) and the corresponding numerical elements that make that sum
-#' @export
+#' @export greedy_knapsack
 
 set.seed(42)
 n <- 2000
