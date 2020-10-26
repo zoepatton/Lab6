@@ -1,14 +1,3 @@
-#' Largest possible value in weighted bag - brute force
-#'
-#' This function takes the values and weights provided in a data frame and finds the largest possible sum of values that is less than or equal to the inputed weight by trying all possible combinations. 
-#'
-#' @param x data frame
-#' @param W positive numeric value
-#' @return The output will be a numerical value(the largest possible sum) and the corresponding numerical elements that make that sum
-#' @export brute_force_knapsack
-
-
-
 set.seed(42)
 n <- 2000
 knapsack_objects <-
@@ -18,6 +7,16 @@ knapsack_objects <-
 
 #largest value (sum of v's in the data frame) that is below the overall weight 
 
+#' Largest possible value in weighted bag - brute force
+#'
+#' This function takes the values and weights provided in a data frame and finds the largest possible sum of values that is less than or equal to the inputed weight by trying all possible combinations. 
+#'
+#' @param x data frame
+#' @param W positive numeric value
+#' @param parallel gives opportunity to use parallel programming
+#' @return The output will be a numerical value(the largest possible sum) and the corresponding numerical elements that make that sum
+#' @import parallel
+#' @export brute_force_knapsack
 
 
 brute_force_knapsack<-function(x,W, parallel=FALSE){

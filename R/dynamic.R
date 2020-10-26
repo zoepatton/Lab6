@@ -1,3 +1,10 @@
+set.seed(42)
+n <- 2000
+knapsack_objects <-
+  data.frame(
+    w=sample(1:4000, size = n, replace = TRUE), v=runif(n = n, 0, 10000)
+  )
+
 #' Largest possible value in weighted bag - dynamic
 #'
 #' This function takes the values and weights provided in a data frame and finds the largest possible sum of values that is less than or equal to the inputed weight by iterating over all possible values of the weight.
@@ -7,12 +14,6 @@
 #' @return The output will be a numerical value(the largest possible sum) and the corresponding numerical elements that make that sum
 #' @export knapsack_dynamic
 
-set.seed(42)
-n <- 2000
-knapsack_objects <-
-  data.frame(
-    w=sample(1:4000, size = n, replace = TRUE), v=runif(n = n, 0, 10000)
-  )
 
 
 knapsack_dynamic <- function(x,W){
