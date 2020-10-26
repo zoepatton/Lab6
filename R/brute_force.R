@@ -66,14 +66,13 @@ brute_force_knapsack<-function(x,W, parallel=FALSE){
     } 
     
     maxweight<-which(unlist(weights)<=W)
-    correspondingValues<-unlist(values)[maxweight]
+    correspondingValues<-(round(unlist(values)))[maxweight]
     valuesmax<-max(correspondingValues)
     
-    index<-which(unlist(values) == valuesmax)
-    coorespondingElement<-unlist(elementCombos)[index]
-    
-    
-    return(list(value=round(valuesmax),elements=unlist(coorespondingElement)))
+    index<-which((round(unlist(values))) == valuesmax)
+    coorespondingElement<-(unlist(elementCombos))[index]
+
+    return(list(value=round(valuesmax),elements=as.numeric(unlist(strsplit(coorespondingElement," ")))))
   }
   else
     stop("values are not positive")
